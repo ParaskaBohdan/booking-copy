@@ -1,0 +1,27 @@
+input[type="date"] {
+    border: none;
+    background: transparent;
+  }
+  
+  input[type="date"]:focus {
+    outline: none;
+  }
+  
+  input[type="text"] {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    pointer-events: none;
+  }
+  
+  div {
+    display: inline-block;
+    position: relative;
+    padding: 1px;
+  }
+  
+  div:focus-within input[type="text"] {
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+  
