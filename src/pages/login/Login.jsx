@@ -13,7 +13,6 @@ class AuthPage extends Component {
   };
 
   handleLogin = () => {
-    const { email, password } = this.state;
     // Реалізуйте логіку авторизації тут (наприклад, з використанням Firebase або інших сервісів).
     // Ваш код авторизації повинен бути розміщений тут.
   };

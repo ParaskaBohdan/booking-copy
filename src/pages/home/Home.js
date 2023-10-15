@@ -1,4 +1,3 @@
-import Counter from "../../components/counter/Counter";
 import DatePicker from "../../components/datePicker/DatePicker";
 import DropCounter from "../../components/dropCounter/dropCounter";
 import Search from "../../components/search/Search";

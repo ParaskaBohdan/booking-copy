@@ -31,15 +31,12 @@ const Header = (props) => {
                 </li>
 
                 <li className="NavList">
-                <a>
                     <img src="/images/nav-messaging.svg" alt="" />
                     <span>Повідомлення</span>
-                </a>
+
                 </li>
                 <li className="NavList">
-                <a>
                     <span>Сповіщення</span>
-                </a>
                 </li>
                 <li className="Navlist">
                     <NavLink to='/login' className= {({isActive}) => isActive ? activeLink : normalLink}>
