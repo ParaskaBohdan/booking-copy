@@ -3,13 +3,11 @@ import './style.css'
 
 const Search = () => {
     return ( 
-        <>
-            <form onsubmit="event.preventDefault();" role="search">
-                <label for="search">Search for stuff</label>
-                <input id="search" type="search" placeholder="Search..." autofocus required />
-                <button type="submit">Go</button>    
+        <div className='DataPicker'>
+            <form className='SearchBar' onsubmit="event.preventDefault();" role="search">
+                <input id="search" type="search" placeholder="Search..." autofocus required /> 
             </form>
-        </>
+        </div>
      );
 }
  

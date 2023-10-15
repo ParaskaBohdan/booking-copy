@@ -1,13 +1,20 @@
+import Counter from "../../components/counter/Counter";
 import DatePicker from "../../components/datePicker/DatePicker";
+import DropCounter from "../../components/dropCounter/dropCounter";
 import Search from "../../components/search/Search";
+import './style.css'
 
 const Home = () => {
     return ( 
     <>
-    <h1>Home</h1>
-    <p>los6</p>
-    <Search />
-    <DatePicker />
+    <div className="AllSearch">
+        <Search />
+        <DatePicker />
+        <DropCounter />
+        <button>
+            GO
+        </button>
+    </div>
     </> );
 }
  

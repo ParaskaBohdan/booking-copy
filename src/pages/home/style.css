@@ -1,3 +1,12 @@
 .body{
     background-color: antiquewhite;
 }
+.AllSearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    position: absolute;
+}

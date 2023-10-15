@@ -1,0 +1,32 @@
+.Counter span {
+    cursor: pointer;
+  }
+  
+  .Counter .number {
+    margin: 100px;
+  }
+  
+  .Counter .minus,
+  .Counter .plus {
+    width: 20px;
+    height: 20px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 3px 1px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .Counter input {
+    height: 34px;
+    width: 20px;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  

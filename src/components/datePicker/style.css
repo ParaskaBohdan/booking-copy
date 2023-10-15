@@ -1,27 +1,28 @@
-input[type="date"] {
+.DataPicker input[type="date"] {
     border: none;
     background: transparent;
   }
   
-  input[type="date"]:focus {
+  .DataPicker input[type="date"]:focus {
     outline: none;
   }
   
-  input[type="text"] {
+  .DataPicker input[type="text"] {
     position: absolute;
-    left: 0;
     z-index: -1;
-    width: 100%;
     pointer-events: none;
+    width: 240px;
+    padding-left: 3px;
+    padding-bottom: 4px;
   }
   
-  div {
+  .DataPicker div {
     display: inline-block;
     position: relative;
     padding: 1px;
   }
   
-  div:focus-within input[type="text"] {
+  .DataPicker:focus-within input[type="text"] {
     outline: -webkit-focus-ring-color auto 5px;
   }
   
