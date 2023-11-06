@@ -1,39 +1,39 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import './style.css';
-import { API_URL } from '../../index';
-import axios from 'axios';
+// import { API_URL } from '../../index';
+// import axios from 'axios';
 
 const ModalDwelling = (props) => {
-  const { dwelling } = props;
+//   const { dwelling } = props;
 //   const [showModal, setShowModal] = useState(true);
-  const [images, setImages] = useState([]);
+//   const [images, setImages] = useState([]);
 
 //   const handleClose = () => {
 //     setShowModal(false);
 //     onClose();
 //   };
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const imageRequests = dwelling.photos.map((photo) => {
-            console.log(API_URL + photo.image);
-          return axios.get(API_URL + photo.image);
-        });
+//   useEffect(() => {
+//     const fetchImages = async () => {
+//       try {
+//         const imageRequests = dwelling.photos.map((photo) => {
+//             console.log(API_URL + photo.image);
+//           return axios.get(API_URL + photo.image);
+//         });
 
-        const imageResponses = await Promise.all(imageRequests);
-        const imageUrls = imageResponses.map((response) => {
-          return URL.createObjectURL(new Blob([response.data]));
-        });
+//         const imageResponses = await Promise.all(imageRequests);
+//         const imageUrls = imageResponses.map((response) => {
+//           return URL.createObjectURL(new Blob([response.data]));
+//         });
 
-        setImages(imageUrls);
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
-    };
+//         setImages(imageUrls);
+//       } catch (error) {
+//         console.error('Error fetching images:', error);
+//       }
+//     };
 
-    fetchImages();
-  }, [dwelling.photos]);
+//     fetchImages();
+//   }, [dwelling.photos]);
   return (
     // <div className={`modal ${showModal ? 'show' : 'hide'}`}>
     //   <div className="modal-content">
