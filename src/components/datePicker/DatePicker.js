@@ -3,8 +3,8 @@ import './style.css'
 const DatePicker = () => {
     return ( 
         <>
-            <div className='DataPicker' tabindex="0">
-                <input type="text" tabindex="-1" />
+            <div className='DataPicker' tabIndex="0">
+                <input type="text" tabIndex="-1" />
                 <input type="date"/>—<input type="date" />
             </div>
         </>

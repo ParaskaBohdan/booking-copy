@@ -13,8 +13,6 @@ class AuthPage extends Component {
   };
 
   handleLogin = () => {
-    // Реалізуйте логіку авторизації тут (наприклад, з використанням Firebase або інших сервісів).
-    // Ваш код авторизації повинен бути розміщений тут.
   };
 
   render() {
@@ -29,14 +27,14 @@ class AuthPage extends Component {
             name="email"
             value={email}
             onChange={this.handleInputChange}
-            placeholder="Електронна пошта"
+            placeholder="Email"
           />
           <input
             type="password"
             name="password"
             value={password}
             onChange={this.handleInputChange}
-            placeholder="Пароль"
+            placeholder="Password"
           />
           <button onClick={this.handleLogin}>Увійти</button>
         </div>

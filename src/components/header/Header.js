@@ -23,7 +23,7 @@ const Header = (props) => {
             </div>
             <nav className="Nav">
             <ul className="NavListWrap">
-                <li className="NavList active">
+                <li className="NavList">
                 <NavLink to='/' className= {({isActive}) => isActive ? activeLink : normalLink}>
                     <img src="/images/nav-home.svg" alt="" />
                     <span>Головна</span>
@@ -31,8 +31,9 @@ const Header = (props) => {
                 </li>
 
                 <li className="NavList">
-                    <img src="/images/nav-messaging.svg" alt="" />
-                    <span>Повідомлення</span>
+                    <NavLink to='/dwelling' className= {({isActive}) => isActive ? activeLink : normalLink}>
+                        <span>Вхід</span>
+                    </NavLink>
 
                 </li>
                 <li className="NavList">
@@ -41,6 +42,11 @@ const Header = (props) => {
                 <li className="Navlist">
                     <NavLink to='/login' className= {({isActive}) => isActive ? activeLink : normalLink}>
                         <span>Вхід</span>
+                    </NavLink>
+                </li>
+                <li className="Navlist">
+                    <NavLink to='/registry' className= {({isActive}) => isActive ? activeLink : normalLink}>
+                        <span>Реєстрація</span>
                     </NavLink>
                 </li>
             </ul>

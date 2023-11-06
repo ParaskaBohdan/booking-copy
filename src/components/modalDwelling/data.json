@@ -1,0 +1,14 @@
+[
+    {
+        "userid": 1,
+        "username": "admin",
+        "password": "admin",
+        "email": "dracon@gmail.com"
+    },
+    {
+        "userid": 2,
+        "username": "user",
+        "password": "user",
+        "email": "safasd@gmail.com"
+    }
+]

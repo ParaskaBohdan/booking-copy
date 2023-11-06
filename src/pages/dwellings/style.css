@@ -1,0 +1,22 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  .list-dwellings {
+    /* Стилі для блоку ListDwellings */
+  }
+  
+  .modal-student {
+    /* Стилі для блоку ModalStudent */
+  }
+  
