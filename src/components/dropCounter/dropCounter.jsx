@@ -36,13 +36,13 @@ class DropCounter extends Component {
 
   updateButtonText() {
     const { adults, children, rooms } = this.state;
-    const buttonText = `${adults} дорослих · ${children} дітей · ${rooms} номерів`;
+    const buttonText = `${adults} adults · ${children} childs · ${rooms} apartment`;
     this.setState({ buttonText });
   }
 
   render() {
     const { isOpen, adults, children, rooms } = this.state;
-    const buttonText = `${adults} дорослих · ${children} дітей · ${rooms} номерів`;
+    const buttonText = `${adults} adults · ${children} childs · ${rooms} apartment`;
 
     return (
       <div className={`dropdown ${isOpen ? 'show' : ''}`}>
@@ -50,11 +50,11 @@ class DropCounter extends Component {
           {buttonText}
         </button>
         <div id="myDropdown" className={`dropdown-content ${isOpen ? 'show' : ''}`}>
-          <p>Дорослі :</p>
+          <p>Adults :</p>
           <Counter min={1} default={adults} onChange={this.handleAdultsChange} />
-          <p>Діти :</p>
+          <p>Childs :</p>
           <Counter min={0} default={children} onChange={this.handleChildrenChange} />
-          <p>Номери :</p>
+          <p>Apartment :</p>
           <Counter min={1} default={rooms} onChange={this.handleRoomsChange} />
         </div>
       </div>
