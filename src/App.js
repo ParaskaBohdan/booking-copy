@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import Login from './pages/login/Login';
 import Dwellings from './pages/dwellings/Dwellings';
 import Registry from './pages/registry/Registry';
+import Signout from './pages/sign out/Sign out';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path="/dwelling" element={<Dwellings />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/registry" element={<Registry />} />
+                    <Route path="/sign out" element={<Signout />} />
                 </Routes>
         </div>
         </Router>

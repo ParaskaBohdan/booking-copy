@@ -3,7 +3,9 @@ import { API_URL } from '../../index';
 import axios from 'axios';
 import './style.css';
 
-class AuthPage extends Component {
+
+class Signin extends Component {
+
     state = {
         name: '',
         email: '',
@@ -25,7 +27,6 @@ class AuthPage extends Component {
         };
     
         const token = API_URL + '/api/auth/jwt/create/';
-    
         try {
           console.log('login started');
           console.log(userData);
@@ -33,7 +34,6 @@ class AuthPage extends Component {
           console.log(tokenResponse.data);
           console.log('login successful:', tokenResponse.data);
           localStorage.setItem('token', tokenResponse.data.access);
-          // Додайте обробку успішної реєстрації тут, наприклад, перенаправлення на іншу сторінку
         } catch (error) {
           console.error('Failed:', error);
         }
@@ -81,4 +81,4 @@ class AuthPage extends Component {
       }
 }
 
-export default AuthPage;
+export default Signin;
