@@ -39,12 +39,12 @@ class Counter extends Component {
     render() {
       return (
         <div className="Сounter">
-          <button className="minus" onClick={this.handleDecrement}>
-                <FontAwesomeIcon icon={faMinus} />
+          <button className="plus" onClick={this.handleIncrement}>
+                <FontAwesomeIcon icon={faPlus} />
             </button>
             <input type="text" value={this.state.count} readOnly />
-            <button className="plus" onClick={this.handleIncrement}>
-                <FontAwesomeIcon icon={faPlus} />
+            <button className="minus" onClick={this.handleDecrement}>
+                <FontAwesomeIcon icon={faMinus} />
             </button>
         </div>
       );
@@ -52,4 +52,3 @@ class Counter extends Component {
   }
   
 export default Counter;
-

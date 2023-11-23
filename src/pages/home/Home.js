@@ -1,15 +1,11 @@
-import DatePicker from "../../components/datePicker/DatePicker";
-import DropCounter from "../../components/dropCounter/dropCounter";
-import Search from "../../components/search/Search";
+import SearchBar from '../../components/searchBar/SearchBar';
 import './style.css'
 
 const Home = () => {
     return ( 
     <>
-    <div className="AllSearch">
-        <Search />
-        <DatePicker />
-        <DropCounter />
+    <div className="bar">
+        <SearchBar />
         <button>
             GO
         </button>

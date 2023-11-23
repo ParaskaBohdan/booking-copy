@@ -3,6 +3,7 @@ import { API_URL } from '../../index';
 import ListDwellings from '../../components/listDwellings/ListDwellings';
 import axios from 'axios';
 import './style.css';
+import SearchBar from '../../components/searchBar/SearchBar';
 
 const Dwellings = () => {
   const [Dwellings, setDwellings] = useState([]);
@@ -23,15 +24,18 @@ const Dwellings = () => {
   };
 
   return (
-    <div style={{ marginTop: '20px' }}>
+    <div className="container"style={{ marginTop: '20px', display:'flex', flexDirection:'column' }}>
       <div className="row">
         <div className="col">
+            
           <div className="list-dwellings">
+      <SearchBar />
+
             <ListDwellings Dwellings={Dwellings} resetState={resetState} newStudent={false} />
           </div>
         </div>
       </div>
-      <img src={API_URL + '/media/photos/1.jpg'}  alt="ads" />
+      <img src={API_URL + '/api/media/photos/1.jpg'}  alt="ads" />
       <div className="row"></div>
     </div>
   );

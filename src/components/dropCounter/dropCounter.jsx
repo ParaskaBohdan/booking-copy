@@ -10,6 +10,7 @@ class DropCounter extends Component {
     rooms: 1,
   };
 
+  
   toggleDropdown = () => {
     this.setState((prevState) => ({
       isOpen: !prevState.isOpen,
