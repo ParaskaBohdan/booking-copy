@@ -7,6 +7,8 @@ import SearchBar from '../../components/searchBar/SearchBar';
 
 const Dwellings = () => {
   const [Dwellings, setDwellings] = useState([]);
+  const [filters, setFilters] = useState({});
+  
   const URL = API_URL + '/api/dwellings';
   console.log(URL);
   const getDwellings = useCallback(() => {
@@ -17,10 +19,12 @@ const Dwellings = () => {
     getDwellings();
   }, [getDwellings]);
 
-
-
   const resetState = () => {
     getDwellings();
+  };
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
   };
 
   return (
@@ -29,8 +33,7 @@ const Dwellings = () => {
         <div className="col">
             
           <div className="list-dwellings">
-      <SearchBar />
-
+            <SearchBar onFilterChange={handleFilterChange} />
             <ListDwellings Dwellings={Dwellings} resetState={resetState} newStudent={false} />
           </div>
         </div>

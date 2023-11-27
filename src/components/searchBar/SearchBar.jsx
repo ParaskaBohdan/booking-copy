@@ -1,41 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from '../datePicker/DatePicker';
 import DropCounter from '../dropCounter/DropCounter';
 import Search from '../search/Search';
 import './style.css';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [searchValue, setSearchValue] = useState('');
-  const [entryDate, setEntryDate] = useState('');
-  const [exitDate, setExitDate] = useState('');
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
+  const [dates, setDates] = useState({ entryDate: '', exitDate: '' });
+
+  
 
   const handleSearchChange = (value) => {
     setSearchValue(value);
-    console.log('Search Value:', value);
+  };
+  
+  const handleDateChange = (date) => {
+    setDates(date);
   };
 
-  const handleDateChange = (entry) => {
-    setEntryDate(entry);
-    console.log('Entry Date:', entry);
+  const handleCounterChange = (guests) => {
+    setAdults(guests.adults);
+    setChildren(guests.children);
+    setRooms(guests.rooms);
+    props.onFilterChange({ searchValue, dates, guests });
   };
 
-  const handleCounterChange = (adults, children, rooms) => {
-    setAdults(adults);
-    setChildren(children);
-    setRooms(rooms);
-    console.log('Adults:', adults);
-    console.log('Children:', children);
-    console.log('Rooms:', rooms);
-  };
+//   useEffect(() => {}, [searchValue]);
+
+//   useEffect(() => {
+// }, [dates]);
+
+  useEffect(() => {
+  }, [adults, children, rooms]);
+  
 
   return (
     <div className="AllSearch">
       <Search onChange={handleSearchChange} />
       <DatePicker onChange={handleDateChange} />
-      <DropCounter onChange={handleCounterChange} />
+      <DropCounter onClick={handleCounterChange} />
     </div>
   );
 };
