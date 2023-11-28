@@ -1,6 +1,4 @@
-/* style.css */
-/* Загальні стилі для таблиці */
-.table-container {
+/* .table-container {
     overflow-x: auto;
     margin-top: 20px;
   }
@@ -14,7 +12,7 @@
   .table th, .table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: center; /* Вирівнювання тексту по центру */
+    text-align: center; 
   }
   
   .table th {
@@ -34,9 +32,6 @@
     margin-right: 5px;
   }
   
-/* dracon */
-
-/* Загальні стилі для таблиці */
 .table-container {
     overflow-x: auto;
   }
@@ -53,7 +48,6 @@
     text-align: left;
   }
   
-  /* Медіа-запит для адаптивності на екрани менше 768 пікселів */
   @media screen and (max-width: 768px) {
     .table th, .table td {
       font-size: 14px;
@@ -74,4 +68,4 @@
       text-align: right;
     }
   }
-  
+   */
