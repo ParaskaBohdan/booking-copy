@@ -1,5 +1,7 @@
 /* style.css */
+/* Загальні стилі для таблиці */
 .table-container {
+    overflow-x: auto;
     margin-top: 20px;
   }
   
@@ -12,7 +14,7 @@
   .table th, .table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center; /* Вирівнювання тексту по центру */
   }
   
   .table th {
@@ -30,5 +32,46 @@
   
   .modal-button {
     margin-right: 5px;
+  }
+  
+/* dracon */
+
+/* Загальні стилі для таблиці */
+.table-container {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Медіа-запит для адаптивності на екрани менше 768 пікселів */
+  @media screen and (max-width: 768px) {
+    .table th, .table td {
+      font-size: 14px;
+    }
+  
+    .table thead {
+      display: none;
+    }
+  
+    .table tbody tr {
+      display: block;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+  
+    .table tbody td {
+      display: block;
+      text-align: right;
+    }
   }
   

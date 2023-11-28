@@ -1,61 +1,51 @@
-import React from 'react';
-import ModalDwelling from '../modalDwelling/ModalDwelling';
-// import AppRemoveDwelling from '../appRemoveDwelling/AppRemoveDwelling';
-// import ModalImage from '../modalImage/ModalImage';
+import React, { useEffect, useState, useCallback } from 'react';
+import { API_URL } from '../../index';
+import ListDwellings from '../../components/listDwellings/ListDwellings';
+import axios from 'axios';
 import './style.css';
+import SearchBar from '../../components/searchBar/SearchBar';
 
-const ListDwellings = (props) => {
-  const { Dwellings } = props;
+const Dwellings = () => {
+  const [Dwellings, setDwellings] = useState([]);
+  const [Filters, setFilters] = useState({}); //{searchValue, dates, adults, children, rooms}
+  const URL = API_URL + '/api/dwellings';
+  
+  const getDwellings = useCallback(() => {
+    axios.get(URL).then((data) => setDwellings(data.data));
+    console.log('alfa');
+  }, [URL]);
+
+  useEffect(() => {
+    getDwellings();
+  }, [getDwellings]);
+
+  const resetState = () => {
+    getDwellings();
+  };
+
+  const handleFilterChanges = () => {
+    console.log('beta');
+    // Add logic for handling filter changes
+  };
+
+  useEffect(() => {
+    handleFilterChanges();
+  }, [Filters]);
 
   return (
-    <div className="table-container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>City</th>
-            <th>Area</th>
-            <th>Guests</th>
-            <th>Images</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!Dwellings || Dwellings.length <= 0 ? (
-            <tr>
-              <td colSpan="6" align="center">
-                <b>Пока ничего нет</b>
-              </td>
-            </tr>
-          ) : (
-            Dwellings.map((dwelling) => (
-              <tr key={dwelling.id}>
-                <td>{dwelling.title}</td>
-                <td>{dwelling.city.name}</td>
-                <td>{dwelling.area} m²</td>
-                <td>{dwelling.guests} guests</td>
-                {/* <td>
-                  <ModalImage Images={dwelling.Images} />
-                </td> */}
-                <td>
-                  <ModalDwelling
-                    create={false}
-                    dwelling={dwelling}
-                    resetState={props.resetState}
-                    newDwelling={props.newDwelling}
-                    onClose={() => {}}
-                  />
-                  {/* <AppRemoveDwelling
-                    id={dwelling.id}
-                    resetState={props.resetState}
-                  /> */}
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+    <div style={{ marginTop: '20px' }}>
+      <div className="row">
+        <div className="col">
+          <div className="list-dwellings">
+            <SearchBar onChange={handleFilterChanges} />
+            <ListDwellings Dwellings={Dwellings} resetState={resetState} filters={Filters} />
+          </div>
+        </div>
+      </div>
+      <img src={API_URL + '/api/media/photos/1.jpg'} alt="ads" />
+      <div className="row"></div>
     </div>
   );
 };
-export default ListDwellings;
+
+export default Dwellings;

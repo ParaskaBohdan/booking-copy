@@ -4,7 +4,7 @@ import DropCounter from '../dropCounter/DropCounter';
 import Search from '../search/Search';
 import './style.css';
 
-const SearchBar = (props) => {
+const SearchBar = ({onChange}) => {
   const [searchValue, setSearchValue] = useState('');
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
@@ -25,7 +25,9 @@ const SearchBar = (props) => {
     setAdults(guests.adults);
     setChildren(guests.children);
     setRooms(guests.rooms);
-    props.onFilterChange({ searchValue, dates, guests });
+    if (typeof onChange === 'function') {
+        onChange({ searchValue, dates, adults, children, rooms });
+      }
   };
 
 //   useEffect(() => {}, [searchValue]);

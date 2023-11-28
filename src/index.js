@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-export const API_URL = 'http://ec2-16-16-25-0.eu-north-1.compute.amazonaws.com';
-// export const API_URL = 'http://127.0.0.1:8000';
+// export const API_URL = 'http://ec2-16-16-25-0.eu-north-1.compute.amazonaws.com';
+export const API_URL = 'http://127.0.0.1:8000';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <App />
