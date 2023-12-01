@@ -7,7 +7,7 @@ const DatePicker = ({ onChange }) => {
 
   useEffect(() => {
     onChange({ entryDate, exitDate });
-  }, [entryDate, exitDate]);
+  }, [entryDate, exitDate, onChange]);
 
   const handleEntryDateChange = (event) => {
     const value = event.target.value;
