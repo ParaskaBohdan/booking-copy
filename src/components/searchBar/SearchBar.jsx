@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from '../datePicker/DatePicker';
-<<<<<<< HEAD
 import DropCounter from '../dropCounter/dropCounter';
-=======
-import DropCounter from '../dropCounter/dropCounter';
->>>>>>> d397904abd5e7f73c884bca9d363033b849545c4
 import Search from '../search/Search';
 import './style.css';
 
