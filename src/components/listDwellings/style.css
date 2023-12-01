@@ -1,5 +1,5 @@
-/* style.css */
-.table-container {
+/* .table-container {
+    overflow-x: auto;
     margin-top: 20px;
   }
   
@@ -12,7 +12,7 @@
   .table th, .table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center; 
   }
   
   .table th {
@@ -32,3 +32,40 @@
     margin-right: 5px;
   }
   
+.table-container {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .table th, .table td {
+      font-size: 14px;
+    }
+  
+    .table thead {
+      display: none;
+    }
+  
+    .table tbody tr {
+      display: block;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+  
+    .table tbody td {
+      display: block;
+      text-align: right;
+    }
+  }
+   */
