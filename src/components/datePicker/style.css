@@ -1,27 +1,25 @@
-.DataPicker input[type="date"] {
-    border: none;
-    background: transparent;
-  }
-  
-  .DataPicker input[type="date"]:focus {
-    outline: none;
-  }
-  
-  .DataPicker input[type="text"] {
-    position: absolute;
-    z-index: -1;
-    pointer-events: none;
-    width: 240px;
-    padding-left: 3px;
-    padding-bottom: 4px;
+.DataPicker {
+    flex-grow: 1;
+    margin-right: 10px;
   }
   
   .DataPicker div {
     display: inline-block;
     position: relative;
     padding: 1px;
+    width: 100%; /* Додайте цей стиль */
   }
   
+  /* Або видаліть цей стиль, якщо не використовуєте властивість z-index */
+  .DataPicker input[type="text"] {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    padding-left: 3px;
+    padding-bottom: 4px;
+  }
+  
+  /* Змініть або видаліть цей стиль в залежності від потреб вашого дизайну */
   .DataPicker:focus-within input[type="text"] {
     outline: -webkit-focus-ring-color auto 5px;
   }

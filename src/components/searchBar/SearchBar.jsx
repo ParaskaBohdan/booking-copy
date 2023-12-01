@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from '../datePicker/DatePicker';
+<<<<<<< HEAD
 import DropCounter from '../dropCounter/dropCounter';
+=======
+import DropCounter from '../dropCounter/DropCounter';
+>>>>>>> d397904abd5e7f73c884bca9d363033b849545c4
 import Search from '../search/Search';
 import './style.css';
 
@@ -10,7 +14,13 @@ const SearchBar = ({onChange}) => {
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
   const [dates, setDates] = useState({ entryDate: '', exitDate: '' });
+<<<<<<< HEAD
   
+=======
+
+  
+
+>>>>>>> d397904abd5e7f73c884bca9d363033b849545c4
   const handleSearchChange = (value) => {
     setSearchValue(value);
   };
