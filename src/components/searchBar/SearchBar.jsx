@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from '../datePicker/DatePicker';
-import DropCounter from '../dropCounter/DropCounter';
+import DropCounter from '../dropCounter/dropCounter';
 import Search from '../search/Search';
 import './style.css';
 
