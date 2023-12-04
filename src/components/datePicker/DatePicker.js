@@ -4,39 +4,37 @@ import './style.css';
 const DatePicker = ({ onChange }) => {
     const [entryDate, setEntryDate] = useState('');
     const [exitDate, setExitDate] = useState('');
-  
+
     useEffect(() => {
-      onChange({ entryDate, exitDate });
-    }, [entryDate, exitDate, onChange]); // Додайте onChange до списку залежностей
-  
+        onChange({ entryDate, exitDate });
+        // eslint-disable-next-line
+    }, [entryDate, exitDate]);
+
     const handleEntryDateChange = (event) => {
-      const value = event.target.value;
-      setEntryDate(value);
+        const value = event.target.value;
+        setEntryDate(value);
     };
-  
+
     const handleExitDateChange = (event) => {
-      const value = event.target.value;
-      setExitDate(value);
+        const value = event.target.value;
+        setExitDate(value);
     };
-  
+
     return (
-      <>
         <div className='DatePicker' tabIndex="0">
-          <input
-            type="date"
-            value={entryDate}
-            onChange={handleEntryDateChange}
-          />
-          —
-          <input
-            type="date"
-            value={exitDate}
-            onChange={handleExitDateChange}
-          />
+            <input
+                type="date"
+                value={entryDate}
+                onChange={handleEntryDateChange}
+            />
+            —
+            <input
+                type="date"
+                value={exitDate}
+                onChange={handleExitDateChange}
+            />
         </div>
-      </>
     );
-  };
-  
-  export default DatePicker;
-  
+};
+
+export default DatePicker;

@@ -13,9 +13,7 @@ const Dwellings = () => {
   
     const getDwellings = useCallback(async () => {
       try {
-        console.log('Fetching data...');
         const response = await axios.get(`${API_URL}/api/dwellings`);
-        console.log('Data fetched successfully:', response.data);
         setDwellings(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
