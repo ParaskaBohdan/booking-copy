@@ -1,5 +1,6 @@
 import React from 'react';
-import ModalDwelling from '../modalDwelling/ModalDwelling';
+// import ModalDwelling from '../modalDwelling/ModalDwelling';
+import { NavLink } from "react-router-dom";
 import './style.css';
 
 const ListDwellings = (props) => {
@@ -39,7 +40,7 @@ const ListDwellings = (props) => {
             <th>City</th>
             <th>Area</th>
             <th>Guests</th>
-            <th>Actions</th>
+            <th>Link</th>
           </tr>
         </thead>
         <tbody>
@@ -56,7 +57,7 @@ const ListDwellings = (props) => {
                 <td>{dwelling.city.name}</td>
                 <td>{dwelling.area} m²</td>
                 <td>{dwelling.guests} guests</td>
-                <td>
+                {/* <td>
                   <ModalDwelling
                     create={false}
                     dwelling={dwelling}
@@ -64,6 +65,11 @@ const ListDwellings = (props) => {
                     newDwelling={props.newDwelling}
                     onClose={() => {}}
                   />
+                </td> */}
+                <td>
+                <NavLink to={'/dwelling/'+dwelling.id}>
+                    <span>{dwelling.title}</span>
+                  </NavLink>
                 </td>
               </tr>
             ))

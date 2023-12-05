@@ -13,9 +13,7 @@ const Dwellings = () => {
   
     const getDwellings = useCallback(async () => {
       try {
-        console.log('Fetching data...');
         const response = await axios.get(`${API_URL}/api/dwellings`);
-        console.log('Data fetched successfully:', response.data);
         setDwellings(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -46,7 +44,6 @@ const Dwellings = () => {
             </div>
           </div>
         </div>
-        <img src={API_URL + '/api/media/photos/1.jpg'} alt="ads" />
         <div className="row"></div>
       </div>
     );
