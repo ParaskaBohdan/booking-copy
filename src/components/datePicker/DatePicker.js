@@ -10,6 +10,7 @@ const DatePicker = ({ onChange }) => {
         // eslint-disable-next-line
     }, [entryDate, exitDate]);
 
+
     const handleEntryDateChange = (event) => {
         const value = event.target.value;
         setEntryDate(value);
