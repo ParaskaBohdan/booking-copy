@@ -44,7 +44,6 @@ const Dwellings = () => {
             </div>
           </div>
         </div>
-        <img src={API_URL + '/api/media/photos/1.jpg'} alt="ads" />
         <div className="row"></div>
       </div>
     );

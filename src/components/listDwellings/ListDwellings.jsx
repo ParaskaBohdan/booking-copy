@@ -40,7 +40,6 @@ const ListDwellings = (props) => {
             <th>City</th>
             <th>Area</th>
             <th>Guests</th>
-            <th>Actions</th>
             <th>Link</th>
           </tr>
         </thead>

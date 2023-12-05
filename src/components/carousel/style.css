@@ -1,0 +1,49 @@
+/* style.css */
+
+/* Container styles for the Slider component */
+.carousel-container {
+    margin: 20px; /* Add margin as needed */
+  }
+  
+  /* Styles for the individual slides/images */
+  .carousel-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Set a fixed height or adjust as needed */
+    overflow: hidden;
+  }
+  
+  .carousel-slide img {
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    border-radius: 8px; /* Add border-radius for rounded corners, adjust as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  }
+  
+  .slick-slide img{
+    margin: 0 auto; /* Center the image */
+    max-width: 400px;
+    max-height: 400px;
+  }
+  /* Styles for the dots/navigation */
+  .slick-dots {
+    bottom: 10px; /* Adjust the position of the dots */
+  }
+  
+  .slick-dots li {
+    margin: 0 5px; /* Adjust the spacing between dots */
+  }
+  
+  .slick-dots li button {
+    font-size: 12px; /* Adjust the font size of the dots */
+    color: #555; /* Adjust the color of the dots */
+  }
+  
+  .slick-dots li.slick-active button {
+    color: #fff; /* Adjust the color of the active dot */
+  }
+  
+  /* Add more styles as needed */
+  
