@@ -1,30 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Icon } from 'leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const GoogleMap = ({ address }) => {
+const GeoMap = ({ address }) => {
+  const position = [48.618531, 22.291568];
+  const [mapReady, setMapReady] = useState(false);
+  const mapContainerRef = useRef();
+
+  const custom_icon = new Icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/446/446075.png',
+    iconSize: [25, 34],
+    iconAnchor: [12, 34],
+  });
+
   useEffect(() => {
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: { lat: 0, lng: 0 },  
-      zoom: 8,  
-    });
+    const mapContainer = mapContainerRef.current;
 
-    const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ address: address }, (results, status) => {
-      if (status === 'OK') {
-        const location = results[0].geometry.location;
-        map.setCenter(location);
+    if (mapContainer) {
+      mapContainer.addEventListener('click', () => {
+        // Додайте будь-яку дію, яку ви хочете виконати при кліку на мапу
+      });
 
-        new window.google.maps.Marker({
-          map: map,
-          position: location,
-          title: address,
-        });
-      } else {
-        console.error('Geocode was not successful for the following reason:', status);
-      }
-    });
-  }, [address]);
+      mapContainer.addEventListener('transitionend', () => {
+        // Встановити готовність мапи, коли вона закінчить анімацію
+        setMapReady(true);
+      });
+    }
+  }, []);
 
-  return <div id="map" style={{ height: '400px' }}></div>;
+  useEffect(() => {
+    // Перерахувати розміри мапи при готовності
+    if (mapReady) {
+      const map = mapContainerRef.current.leafletElement;
+      map.invalidateSize();
+    }
+  }, [mapReady]);
+
+  return (
+    <MapContainer
+      ref={mapContainerRef}
+      className="map-container"
+      center={position}
+      zoom={21}
+      style={{ height: '70vh' }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={position} icon={custom_icon} />
+    </MapContainer>
+  );
 };
 
-export default GoogleMap;
+export default GeoMap;

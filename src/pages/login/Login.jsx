@@ -36,7 +36,8 @@ function Signin() {
       const tokenResponse = await axios.post(token, userData);
       console.log(tokenResponse.data);
       console.log('Login successful:', tokenResponse.data);
-      localStorage.setItem('token', tokenResponse.data.access);
+      localStorage.setItem('acces_token', tokenResponse.data.access);
+      localStorage.setItem('refresh_token', tokenResponse.data.refresh);
       navigate('/');
       window.location.reload();
     } catch (error) {

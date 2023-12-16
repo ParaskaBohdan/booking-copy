@@ -1,36 +1,51 @@
-import { API_URL } from '../..';
 import React from 'react';
+import { ImageList, ImageListItem, Typography, List, ListItem, ListItemText } from '@mui/material';
+
+import { API_URL } from '../..';
 import './style.css';
 
 const DwellingInfo = ({ dwelling }) => {
+
+
   return (
     <div className="dwelling-info-container">
-      <h2>{dwelling.title}</h2>
-      <p>{dwelling.description}</p>
+      <Typography variant="h2">{dwelling.title}</Typography>
+      <Typography variant="body1">{dwelling.description}</Typography>
 
-        <div className="photos">
-            {dwelling.photos.map((photo, index) => (
-                <img key={index} src={API_URL + photo.image} alt='dragon' />
-            ))}
-        </div>
+      <ImageList rowHeight={160} cols={3} gap={8} className="photos">
+        {dwelling.photos.map((photo, index) => (
+          <ImageListItem key={index} >
+            <img src={API_URL + photo.image} alt='dragon' style={{ cursor: 'pointer' }} />
+          </ImageListItem>
+        ))}
+      </ImageList>
 
-      <div className="details-container">
-        <h3>Details</h3>
-        <p>Guests: {dwelling.guests}</p>
-        <p>Area: {dwelling.area} m²</p>
-        {/* Додайте інші деталі про житло */}
-      </div>
 
-      <div className="features-container">
-        <h3>Features</h3>
+      {/* <div className="details-container">
+        <Typography variant="h3">Details</Typography>
+        <Typography variant="body1">Guests: {dwelling.guests}</Typography>
+        <Typography variant="body1">Area: {dwelling.area} m²</Typography>
+      </div> */}
+
+      {/* <div className="features-container">
+        <Typography variant="h3">Features</Typography>
         <ul>
           {dwelling.features.map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}
         </ul>
-      </div>
+      </div> */}
 
-      {/* Додайте аналогічні блоки для інших розділів */}
+        <div className="features-container">
+            <Typography variant="h3">Features</Typography>
+            <List>
+                {dwelling.features.map((feature, index) => (
+                <ListItem key={index}>
+                    <ListItemText primary={feature} />
+                </ListItem>
+                ))}
+            </List>
+        </div>
 
     </div>
   );

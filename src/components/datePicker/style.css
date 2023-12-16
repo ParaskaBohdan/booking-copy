@@ -10,7 +10,6 @@
     width: 100%; /* Додайте цей стиль */
   }
   
-  /* Або видаліть цей стиль, якщо не використовуєте властивість z-index */
   .DataPicker input[type="text"] {
     position: absolute;
     pointer-events: none;
