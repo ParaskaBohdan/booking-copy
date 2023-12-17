@@ -6,9 +6,11 @@ const DatePicker = ({ onChange }) => {
   const [entryDate, setEntryDate] = useState('');
   const [exitDate, setExitDate] = useState('');
 
-  useEffect(() => {
-    onChange({ entryDate, exitDate });
-  }, [entryDate, exitDate, onChange]);
+    useEffect(() => {
+        onChange({ entryDate, exitDate });
+        // eslint-disable-next-line
+    }, [entryDate, exitDate]);
+
 
   const handleDateChange = (type) => (event) => {
     const value = event.target.value;
