@@ -16,7 +16,7 @@ const theme = createTheme({
   });
 
 const Header = (props) => {
-  const token = localStorage.getItem('acces_token');
+  const token = localStorage.getItem('access_token');
 
   return (
     <ThemeProvider theme={theme}>
@@ -64,6 +64,14 @@ const Header = (props) => {
             )}
             {token && (
               <>
+              <li className="Navlist">
+                  <NavLink
+                    to="/user"
+                    className={({ isActive }) => (isActive ? activeLink : normalLink)}
+                  >
+                    <span>My profile</span>
+                  </NavLink>
+                </li>
                 <li className="Navlist">
                   <NavLink
                     to="/signout"

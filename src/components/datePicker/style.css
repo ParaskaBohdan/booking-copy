@@ -7,7 +7,7 @@
     display: inline-block;
     position: relative;
     padding: 1px;
-    width: 100%; /* Додайте цей стиль */
+    width: 100%; 
   }
   
   .DataPicker input[type="text"] {
@@ -18,7 +18,6 @@
     padding-bottom: 4px;
   }
   
-  /* Змініть або видаліть цей стиль в залежності від потреб вашого дизайну */
   .DataPicker:focus-within input[type="text"] {
     outline: -webkit-focus-ring-color auto 5px;
   }

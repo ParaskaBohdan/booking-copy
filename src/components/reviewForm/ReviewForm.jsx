@@ -6,6 +6,7 @@ const ReviewForm = ({ onSaveReview }) => {
 
   const handleSaveReview = () => {
     onSaveReview({ comment });
+    setComment('');
   };
 
   return (
