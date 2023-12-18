@@ -5,6 +5,7 @@ import { API_URL } from '../..';
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
+  // eslint-disable-next-line
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem('access_token');
@@ -13,6 +14,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        // eslint-disable-next-line
         const response = await axios.post(
           `${API_URL}/api/auth/jwt/verify/`,
           { token: token },
