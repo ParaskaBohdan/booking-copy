@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, CircularProgress, Paper, Grid, Button, Box } from '@mui/material';
 import DwellingInfo from '../../components/dwellingInfo/DwellingInfo';
-import GeoMap from '../../components/geoMap/geoMap';
+import GeoMap from '../../components/geoMap/GeoMap';
 import ReviewForm from '../../components/reviewForm/ReviewForm';
 import { API_URL } from '../..';
 import axios from 'axios';
