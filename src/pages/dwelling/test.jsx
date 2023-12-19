@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Typography, CircularProgress, Paper, Grid, Button, Box } from '@mui/material';
 import DwellingInfo from '../../components/dwellingInfo/DwellingInfo';
 import GeoMap from '../../components/geoMap/GeoMap';
+import { Link } from 'react-router-dom';
 import ReviewForm from '../../components/reviewForm/ReviewForm';
 import { API_URL } from '../..';
 import axios from 'axios';
@@ -11,17 +12,15 @@ import useDwelling from './dwellingAPI';
 const Dwelling = () => {
   const { dwellingID } = useParams();
   const dwellingIDNumber = parseInt(dwellingID, 10);
-  const { dwelling, error: dwellingError } = useDwelling(dwellingIDNumber);
-  const [isLoadingDwelling, setIsLoadingDwelling] = useState(true);
-  
+  const { dwelling, error } = useDwelling(dwellingIDNumber);
+  const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const token = localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
-  const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 
   useEffect(() => {
-    const fetchAuthData = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.post(
           `${API_URL}/api/auth/jwt/verify/`,
@@ -30,6 +29,7 @@ const Dwelling = () => {
 
         console.log('Token Verification Response:', response.data);
 
+        setIsLoading(false);
         setIsAuthenticated(true);
       } catch (error) {
         console.error('Error verifying token:', error);
@@ -43,30 +43,18 @@ const Dwelling = () => {
           const newAccessToken = refreshResponse.data.access;
           localStorage.setItem('access_token', newAccessToken);
 
+          setIsLoading(false);
           setIsAuthenticated(true);
         } catch (refreshError) {
           console.error('Error refreshing token:', refreshError);
+
+          setIsLoading(false);
           setIsAuthenticated(false);
         }
-      } finally {
-        setIsLoadingAuth(false);
       }
     };
 
-    const fetchDwellingData = async () => {
-      try {
-        // Запит для отримання даних про житло
-        // ...
-
-        setIsLoadingDwelling(false);
-      } catch (error) {
-        console.error('Error fetching dwelling data:', error);
-        // Обробка помилок отримання даних про житло
-      }
-    };
-
-    // Запуск обох запитів паралельно
-    Promise.all([fetchAuthData(), fetchDwellingData()]);
+    fetchData();
   }, [dwellingIDNumber, token, refreshToken]);
 
   const handleShowReviewForm = () => {
@@ -120,14 +108,15 @@ const Dwelling = () => {
       // Тут ви можете реалізувати логіку для обробки помилок оновлення
     }
   };
+  
 
   return (
     <div>
-      {(isLoadingAuth || isLoadingDwelling) ? (
+      {isLoading ? (
         <CircularProgress />
-      ) : dwellingError ? (
+      ) : error ? (
         <Typography variant="body1" color="error">
-          Помилка отримання даних: {dwellingError.message}
+          Помилка отримання даних: {error.message}
         </Typography>
       ) : (
         <Paper elevation={3} sx={{ p: 2, mb: 2 }}>
@@ -135,25 +124,26 @@ const Dwelling = () => {
         </Paper>
       )}
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Link to="/payment" style={{ textDecoration: 'none' }}>
-            <Button variant="contained" color="primary" onClick={handleShowReviewForm}>
-              Book
-            </Button>
-          </Link>
-        </Box>
-
       {showReviewForm && <ReviewForm onSaveReview={handleSaveReview} />}
       {!isAuthenticated && (
         <Typography variant="body1" color="error">
-          To leave comments, you need to be registered on the site.
+          Для залишення коментарів потрібно бути зареєстрованим на сайті.
         </Typography>
       )}
 
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          {/* Змінено кнопку на компонент Link */}
+          <Link to="/payment" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" onClick={handleShowReviewForm}>
+              Замовити
+            </Button>
+          </Link>
+        </Box>
+        
       {isAuthenticated && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
           <Button variant="contained" color="primary" onClick={handleShowReviewForm}>
-            Leave Reaviwe
+            Залишити відгук
           </Button>
         </Box>
       )}
