@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextField } from '@mui/material';
 import './style.css';
 
 const Search = ({ onChange }) => {
@@ -12,17 +13,12 @@ const Search = ({ onChange }) => {
 
   return (
     <div className=''>
-      <form className='SearchBar' role="search">
-        <input
-          id="search"
-          type="search"
-          placeholder="Search..."
-          autoFocus
-          required
-          value={searchValue}
-          onChange={handleInputChange}
-        />
-      </form>
+      <TextField
+        fullWidth
+        label="Search..."
+        value={searchValue}
+        onChange={handleInputChange}
+      />
     </div>
   );
 };

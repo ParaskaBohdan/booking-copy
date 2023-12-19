@@ -1,0 +1,96 @@
+{
+    "id": 2,
+    "city": {
+        "id": 1,
+        "name": "Callao Salvaje"
+    },
+    "dwelling_type": {
+        "id": 1,
+        "type_name": "Apartment"
+    },
+    "photos": [
+        {
+            "id": 1,
+            "image": "/api/media/photos/1.jpg"
+        },
+        {
+            "id": 2,
+            "image": "/api/media/photos/2.jpg"
+        },
+        {
+            "id": 3,
+            "image": "/api/media/photos/3.jpg"
+        },
+        {
+            "id": 4,
+            "image": "/api/media/photos/4.jpg"
+        },
+        {
+            "id": 5,
+            "image": "/api/media/photos/5.jpg"
+        },
+        {
+            "id": 6,
+            "image": "/api/media/photos/6.jpg"
+        }
+    ],
+    "occupied_dates": [
+        {
+            "id": 1,
+            "check_in": "2023-10-15",
+            "check_out": "2023-10-22"
+        },
+        {
+            "id": 2,
+            "check_in": "2023-10-25",
+            "check_out": "2023-11-01"
+        },
+        {
+            "id": 3,
+            "check_in": "2023-11-22",
+            "check_out": "2023-12-09"
+        }
+    ],
+    "title": "Blue Horizon",
+    "description": "Cozy apartment with contemporary architecture, located in Costa Adeje, in the sunny southwest of Tenerife and on the seafront. The house not only impresses with its excellent views, but also with its fantastic location, very central, close to restaurants and bars. Entering, we are amazed by its large windows and a charming terrace that invites us to relax and enjoy. In addition, this unique and very bright apartment is located in a community with a pool to cool off. Fully equipped, the 55 m2 apartment has 1 bedroom, sofa bed and capacity for 4 people. It also has:\r\n\r\n- Yard\r\n- Garden furniture\r\n- Iron\r\n- Internet access (wifi)\r\n- Dryer\r\n- balcony\r\n- Communal swimming pool\r\n- Open air parking in the same building\r\n- 1 fan\r\n- 1 TV\r\n- Satellite TV (Languages: Spanish, English, German, French).\r\n- American kitchen, with vitroceramic, equipped with fridge, microwave, oven, freezer, washing machine, dishes / cutlery, kitchen utensils, coffee maker, toaster, kettle and juicer.\r\n\r\nThe complex has all the necessary services for the enjoyment of guests, close to bars, restaurants and supermarkets. It is located in Callao Salvaje, 20 m from El Ancla restaurant, 200 m from the supermarket, 200 m from Callao Salvaje sandy beach, 200 m from TITSA bus station, 9 km from Costa Adeje Golf course, 14 km from Aqualand water park, 15 km from Siam park amusement park, 29 km from Reina Sofia airport, 45 km from Parque national del Teide natural park.",
+    "guests": 4,
+    "area": 55.0,
+    "features": [
+        "1 TV",
+        "TV Satellite",
+        "DVD",
+        "2nd floor",
+        "Washing machine",
+        "Garden",
+        "Garden furniture",
+        "Iron",
+        "Internet",
+        "Hair dryer",
+        "Balcony",
+        "55 m² Property",
+        "Communal Swimming pool",
+        "Open-air parking the same building",
+        "1 fan",
+        "Hangers"
+    ],
+    "bedroom": [
+        "1 Double Bed",
+        "1 Sofa Bed Double"
+    ],
+    "kitchen": [
+        "Refrigerator",
+        "Microwave",
+        "Oven",
+        "Freezer",
+        "Dishes/Cutlery",
+        "Kitchen Utensils",
+        "Coffee Machine",
+        "Toaster",
+        "Kettle",
+        "Juicer"
+    ],
+    "bathroom": [
+        "1 Bathroom With Shower",
+        "Hair Dryer"
+    ]
+}
