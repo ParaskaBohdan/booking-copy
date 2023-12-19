@@ -8,6 +8,7 @@ import Registry from './pages/registry/Registry';
 import Signout from './pages/sign out/Sign out';
 import Dwelling from './pages/dwelling/Dwelling';
 import UserPage from './pages/userPage/UserPage';
+import PaymentPage from './pages/paymentPage/PaymentPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/signout" element={<Signout />} />
           <Route path="/dwelling/:dwellingID" element={<Dwelling />} />
           <Route path="/user" element={<UserPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </div>
     </Router>
