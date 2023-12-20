@@ -9,6 +9,7 @@ import Signout from './pages/sign out/Sign out';
 import Dwelling from './pages/dwelling/Dwelling';
 import UserPage from './pages/userPage/UserPage';
 import PaymentPage from './pages/paymentPage/PaymentPage';
+import DwellingPost from './pages/dwellingPost/DwellingPost';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/dwelling/:dwellingID" element={<Dwelling />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/create" element={<DwellingPost />} />
         </Routes>
       </div>
     </Router>
