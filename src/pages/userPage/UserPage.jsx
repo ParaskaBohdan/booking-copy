@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Paper, List, ListItem, ListItemText, CircularProgress } from '@mui/material';
+import { Typography, Paper, List, ListItem, ListItemText, CircularProgress, Box, Link, Button } from '@mui/material';
 import axios from 'axios';
 import { API_URL } from '../..';
 
@@ -77,7 +77,16 @@ const UserPage = () => {
           ) : (
             <Typography variant="body1">No bookings available.</Typography>
           )}
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Link href="/create" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary">
+              Post Dwelling
+            </Button>
+          </Link>
+        </Box>
+
         </Paper>
+        
       )}
     </div>
   );
