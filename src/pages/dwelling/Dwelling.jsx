@@ -7,28 +7,32 @@ import ReviewForm from '../../components/reviewForm/ReviewForm';
 import { API_URL } from '../..';
 import axios from 'axios';
 import useDwelling from './dwellingAPI';
+import Comments from '../../components/comments/Comments';
+import DatePicker from '../../components/datePicker/DatePicker';
 
 const Dwelling = () => {
   const { dwellingID } = useParams();
   const dwellingIDNumber = parseInt(dwellingID, 10);
   const { dwelling, error: dwellingError } = useDwelling(dwellingIDNumber);
   const [isLoadingDwelling, setIsLoadingDwelling] = useState(true);
+  //eslint-disable-next-line
+  const [dates, setDates] = useState({entryDate: '', exitDate: ''});
   
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const token = localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     const fetchAuthData = async () => {
       try {
+        // eslint-disable-next-line
         const response = await axios.post(
           `${API_URL}/api/auth/jwt/verify/`,
           { token: token },
         );
-
-        console.log('Token Verification Response:', response.data);
 
         setIsAuthenticated(true);
       } catch (error) {
@@ -55,17 +59,14 @@ const Dwelling = () => {
 
     const fetchDwellingData = async () => {
       try {
-        // Запит для отримання даних про житло
-        // ...
 
         setIsLoadingDwelling(false);
       } catch (error) {
         console.error('Error fetching dwelling data:', error);
-        // Обробка помилок отримання даних про житло
+
       }
     };
 
-    // Запуск обох запитів паралельно
     Promise.all([fetchAuthData(), fetchDwellingData()]);
   }, [dwellingIDNumber, token, refreshToken]);
 
@@ -73,53 +74,49 @@ const Dwelling = () => {
     setShowReviewForm(true);
   };
 
+  const handleDateChange = (date) => {
+    setDates(date);
+  };
+
   const handleSaveReview = async (reviewData) => {
     const comment = reviewData.comment;
-  
+    const postdata = {
+        rating: 5,
+        comment: comment,
+        dwelling: dwellingIDNumber,
+    }
+    const axiosConfig = {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      };
     try {
-      // Створюємо об'єкт FormData
-      const formData = new FormData();
     
-      // Перевіряємо, чи є масив reviews
       if (!dwelling.reviews) {
         dwelling.reviews = [];
       }
     
-      // Додаємо новий коментар
-      dwelling.reviews.push({ comment });
-    
-      // Додаємо дані житла до FormData
-      formData.append('id', dwelling.id);
-      formData.append('city', JSON.stringify(dwelling.city));
-      formData.append('dwelling_type', JSON.stringify(dwelling.dwelling_type));
-      formData.append('photos', JSON.stringify(dwelling.photos));
-      formData.append('occupied_dates', JSON.stringify(dwelling.occupied_dates));
-      formData.append('title', dwelling.title);
-      formData.append('description', dwelling.description);
-      formData.append('guests', dwelling.guests);
-      formData.append('area', dwelling.area);
-      formData.append('features', JSON.stringify(dwelling.features));
-      formData.append('bedroom', JSON.stringify(dwelling.bedroom));
-      formData.append('kitchen', JSON.stringify(dwelling.kitchen));
-      formData.append('bathroom', JSON.stringify(dwelling.bathroom));
-      
-    
-      // Додаємо дані reviews до FormData (це може бути важливо для сервера)
-      formData.append('reviews', JSON.stringify(dwelling.reviews));
-    
-      // Оновлюємо дані на сервері, передаючи FormData
-      const response = await axios.put(
-        `${API_URL}/api/dwellings/${dwellingIDNumber}/`,
-        formData
+      dwelling.reviews.push({ comment })
+      //eslint-disable-next-line
+      const response = await axios.post(
+        `${API_URL}/api/reviews/`,
+        axiosConfig,
+        postdata,
       );
     
-      console.log('Dwelling Update Response:', response.data);
-      // Тут ви можете реалізувати необхідну логіку після успішного оновлення
     } catch (error) {
       console.error('Error updating dwelling:', error);
-      // Тут ви можете реалізувати логіку для обробки помилок оновлення
     }
   };
+
+  const calculatePrice = async () => {
+    const term = dates.exitDate - dates.entryDate;
+    console.log(term);
+    const term1 = Math.floor(term / (1000 * 60 * 60 * 24));
+    console.log(term1);
+    setPrice(term * dwelling.price);
+};
 
   return (
     <div>
@@ -136,14 +133,17 @@ const Dwelling = () => {
       )}
 
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Link to="/payment" style={{ textDecoration: 'none' }}>
-            <Button variant="contained" color="primary" onClick={handleShowReviewForm}>
+            <DatePicker onChange={handleDateChange}/>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Button component={Link}  to={"/payment/"+price} variant="contained" color="primary" onClick={calculatePrice}>
               Book
             </Button>
-          </Link>
         </Box>
 
-      {showReviewForm && <ReviewForm onSaveReview={handleSaveReview} />}
+<Comments id={dwellingIDNumber} />
+
+    {showReviewForm && <ReviewForm onSaveReview={handleSaveReview} />}
       {!isAuthenticated && (
         <Typography variant="body1" color="error">
           To leave comments, you need to be registered on the site.
@@ -153,10 +153,11 @@ const Dwelling = () => {
       {isAuthenticated && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
           <Button variant="contained" color="primary" onClick={handleShowReviewForm}>
-            Leave Reaviwe
+            Leave Review
           </Button>
         </Box>
       )}
+
       {dwelling.city && dwelling.city.name && (
         <Grid container justifyContent="center">
           <Grid item xs={12} md={6}>

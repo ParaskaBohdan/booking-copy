@@ -29,8 +29,7 @@ const UserPage = () => {
         });
         setUser(userResponse.data[0]);
 
-        // Отримання інформації про бронювання
-        // Ваш метод fetchBookings() тут
+
 
       } catch (error) {
         console.error('Error fetching user data:', error);

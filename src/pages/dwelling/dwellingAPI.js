@@ -10,10 +10,8 @@ const useDwelling = (dwellingIDNumber) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/dwellings/${dwellingIDNumber}/`);
-        console.log('Dwelling Data:', response.data);
         setDwelling(response.data);
       } catch (error) {
-        console.error('Error fetching dwelling data:', error);
         setError(error);
       }
     };

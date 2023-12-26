@@ -19,18 +19,15 @@ const GeoMap = ({ address }) => {
 
     if (mapContainer) {
       mapContainer.addEventListener('click', () => {
-        // Додайте будь-яку дію, яку ви хочете виконати при кліку на мапу
       });
 
       mapContainer.addEventListener('transitionend', () => {
-        // Встановити готовність мапи, коли вона закінчить анімацію
         setMapReady(true);
       });
     }
   }, []);
 
   useEffect(() => {
-    // Перерахувати розміри мапи при готовності
     if (mapReady) {
       const map = mapContainerRef.current.leafletElement;
       map.invalidateSize();

@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Button, TextField, Typography, Snackbar } from '@mui/material';
 
-const PaymentPage = () => {
+const PaymentPage = (props) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  const {price} = useParams();
+  const pricefix = parseInt(price, 10);
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
   const handlePayment = () => {
-    // Перевірка на заповненість усіх полів
     if (cardNumber && expiryDate && cvv && phoneNumber) {
-      // Тут ви можете додати логіку для обробки оплати
-      // Наприклад, вивести повідомлення про успішну оплату
       setOpenSnackbar(true);
     } else {
-      // Якщо не всі поля заповнені, вивести повідомлення про неправильні дані
       alert('Будь ласка, заповніть всі поля коректно');
     }
   };
@@ -27,7 +27,7 @@ const PaymentPage = () => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Оплата
+        Оплата за бронювання: {pricefix} грн
       </Typography>
       <form>
         <TextField
@@ -37,7 +37,7 @@ const PaymentPage = () => {
           margin="normal"
           value={cardNumber}
           onChange={(e) => setCardNumber(e.target.value.replace(/[^\d]/g, ''))}
-          inputProps={{ maxLength: 16 }}
+          inputProps={{ maxLength: 16, minLength: 16}}
         />
         <TextField
           label="Date (MM/YY)"
@@ -47,14 +47,14 @@ const PaymentPage = () => {
           value={expiryDate}
           onChange={(e) => {
             const sanitizedValue = e.target.value.replace(/[^\d]/g, '');
-            const maxLength = 4;
+            const maxLength = 5;
             const formattedValue =
               sanitizedValue.length > 2
                 ? `${sanitizedValue.slice(0, 2)}/${sanitizedValue.slice(2, maxLength)}`
                 : sanitizedValue;
             setExpiryDate(formattedValue.slice(0, maxLength));
           }}
-          inputProps={{ maxLength: 4 }}
+          inputProps={{ maxLength: 5 }}
         />
         <TextField
           label="CVV"
