@@ -8,6 +8,7 @@ function Registry() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fail, setFail] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,17 +23,15 @@ function Registry() {
     const token = API_URL + '/api/auth/jwt/create/';
 
     try {
+//eslint-disable-next-line
       const response = await axios.post(URL, userData);
       const tokenResponse = await axios.post(token, userData);
-      console.log(tokenResponse.data);
-      console.log('User registration successful:', response.data);
-      console.log('User registration successful:', tokenResponse.data);
       localStorage.setItem('access_token', tokenResponse.data.access);
       localStorage.setItem('refresh_token', tokenResponse.data.refresh);
       navigate('/home');
       window.location.reload();
     } catch (error) {
-
+        setFail(true);
     }
   };
 
@@ -40,6 +39,7 @@ function Registry() {
     <div className="auth-page">
       <h2>sign up</h2>
       <div className="auth-form">
+      {fail && <p>Failed to sign up</p>}
         <input
           type="text"
           name="name"

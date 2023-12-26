@@ -5,17 +5,15 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 
 function Signin() {
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fail, setFail] = useState(false);
 
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'name') {
-      setName(value);
-    } else if (name === 'email') {
+    if (name === 'email') {
       setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
@@ -24,23 +22,19 @@ function Signin() {
 
   const handleRegistration = async () => {
     const userData = {
-      username: name,
       email: email,
       password: password,
     };
 
     const token = API_URL + '/api/auth/jwt/create/';
     try {
-      console.log('Login started');
-      console.log(userData);
       const tokenResponse = await axios.post(token, userData);
-      console.log(tokenResponse.data);
-      console.log('Login successful:', tokenResponse.data);
       localStorage.setItem('access_token', tokenResponse.data.access);
       localStorage.setItem('refresh_token', tokenResponse.data.refresh);
       navigate('/');
       window.location.reload();
     } catch (error) {
+        setFail(true);
       console.error('Failed:', error);
     }
   };
@@ -49,13 +43,7 @@ function Signin() {
     <div className="auth-page">
       <h2>Sign in</h2>
       <div className="auth-form">
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleInputChange}
-          placeholder="Username"
-        />
+      {fail && <p>Failed to sign in</p>}
         <input
           type="email"
           name="email"

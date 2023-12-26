@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageList, ImageListItem, Typography, List, ListItem, ListItemText } from '@mui/material';
 
-import { API_URL } from '../..';
 import './style.css';
 
 const DwellingInfo = ({ dwelling }) => {
@@ -15,7 +14,7 @@ const DwellingInfo = ({ dwelling }) => {
       <ImageList rowHeight={160} cols={3} gap={8} className="photos">
         {dwelling.photos.map((photo, index) => (
           <ImageListItem key={index} >
-            <img src={API_URL + photo.image} alt='dragon' style={{ cursor: 'pointer' }} />
+            <img src={photo.image} alt='dragon' style={{ cursor: 'pointer' }} />
           </ImageListItem>
         ))}
       </ImageList>

@@ -24,7 +24,7 @@ function App() {
           <Route path="/signout" element={<Signout />} />
           <Route path="/dwelling/:dwellingID" element={<Dwelling />} />
           <Route path="/user" element={<UserPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment/:price" element={<PaymentPage />} />
           <Route path="/create" element={<DwellingPost />} />
         </Routes>
       </div>
