@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line
 import { Typography, TextField, Button, Grid, Paper, FormControlLabel, FormControl, Checkbox, InputLabel, Input, InputAdornment,
 } from '@mui/material';
 import features from './features.json';
+import axios from 'axios';
+import { API_URL } from '../../index';
 
 const DwellingForm = () => {
   const [dwellingData, setDwellingData] = useState({
     title: '',
+    dwelling_type: {
+        type_name: '',
+    },
+    photos: [{
+        image: '',
+    }],
+    occupied_dates: [{}],
     description: '',
     guests: '',
     area: '',
@@ -14,6 +23,39 @@ const DwellingForm = () => {
     dwellingType: '',
     features: [],
   });
+  const [userID, setUserID] = useState(0);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const tokenResponse = await axios.post(`${API_URL}/api/auth/jwt/refresh/`, {
+          'refresh': localStorage.getItem('refresh_token'),
+        });
+
+        localStorage.setItem('access_token', tokenResponse.data.access);
+
+        const tokendata = await axios.post(`${API_URL}/api/auth/jwt/verify/`, {
+            'token': localStorage.getItem('access_token'),
+          });
+
+        setUserID(tokendata.data.id);
+//eslint-disable-next-line
+        const axiosConfig = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        };
+
+        
+      } catch (error) {
+        console.error('Error verifying token:', error);
+      }
+    };
+
+    fetchData();
+  }, [userID]);
+
 
   const handleChange = (event) => {
     // eslint-disable-next-line
@@ -63,6 +105,16 @@ const DwellingForm = () => {
               margin="normal"
               name="title"
               value={dwellingData.title}
+              onChange={handleChange}
+            />
+            <TextField
+              label="Description"
+              fullWidth
+              multiline
+              rows={4}
+              margin="normal"
+              name="description"
+              value={dwellingData.dwelling_type.type_name}
               onChange={handleChange}
             />
             <TextField

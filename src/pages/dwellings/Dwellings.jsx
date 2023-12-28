@@ -10,6 +10,7 @@ const Dwellings = () => {
     const [loading, setLoading] = useState(true);
     const [Filters, setFilters] = useState({searchValue:'', dates:{entryDate: '', exitDate: ''}, adults:1, children:0,
      rooms:1});
+     
   
     const getDwellings = useCallback(async () => {
       try {
