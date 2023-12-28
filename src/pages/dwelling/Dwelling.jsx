@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line
 import { useParams, Link } from 'react-router-dom';
 import { Typography, CircularProgress, Paper, Grid, Button, Box } from '@mui/material';
 import DwellingInfo from '../../components/dwellingInfo/DwellingInfo';
@@ -9,6 +10,7 @@ import axios from 'axios';
 import useDwelling from './dwellingAPI';
 import Comments from '../../components/comments/Comments';
 import DatePicker from '../../components/datePicker/DatePicker';
+import { useNavigate } from 'react-router-dom';
 
 const Dwelling = () => {
   const { dwellingID } = useParams();
@@ -22,8 +24,9 @@ const Dwelling = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const token = localStorage.getItem('access_token');
   const refreshToken = localStorage.getItem('refresh_token');
+  //eslint-disable-next-line
+  const [dateConfirm, setDateConfirm] = useState(true);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
-  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     const fetchAuthData = async () => {
@@ -110,13 +113,48 @@ const Dwelling = () => {
     }
   };
 
-  const calculatePrice = async () => {
+  const navigate = useNavigate();
+
+  const calculatePrice = () => {
+    if (!dates.entryDate || !dates.exitDate) {
+      alert("Please, choose dates");
+      setDateConfirm(false);
+      return; 
+    }
+  
+    if (dates.entryDate > dates.exitDate) {
+      alert("Please, choose correct dates");
+      setDateConfirm(false);
+      return; 
+    }
+  
+    const isDateOccupied = dwelling.occupied_dates.some((date) => {
+        return date.check_in <= dates.exitDate && date.check_out >= dates.entryDate;
+      });
+      
+  
+    if (isDateOccupied) {
+      alert("This date is already occupied");
+      setDateConfirm(false);
+      return; 
+    }
+  //eslint-disable-next-line
+    if (dateConfirm === false) {
+      setDateConfirm(true);
+      return;
+    }
+  
     const term = dates.exitDate - dates.entryDate;
-    console.log(term);
     const term1 = Math.floor(term / (1000 * 60 * 60 * 24));
-    console.log(term1);
-    setPrice(term * dwelling.price);
-};
+    const params = {
+      entry_date: dates.entryDate,
+      exit_date: dates.exitDate,
+      dwelling: dwellingIDNumber,
+      price: dwelling.price * term1,
+    };
+    navigate('/payment', { state: params });
+  };
+  
 
   return (
     <div>
@@ -136,7 +174,7 @@ const Dwelling = () => {
             <DatePicker onChange={handleDateChange}/>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <Button component={Link}  to={"/payment/"+price} variant="contained" color="primary" onClick={calculatePrice}>
+            <Button variant="contained" color="primary" onClick={calculatePrice}>
               Book
             </Button>
         </Box>

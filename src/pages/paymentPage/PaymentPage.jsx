@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Button, TextField, Typography, Snackbar } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from '../../index';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentPage = (props) => {
   const [cardNumber, setCardNumber] = useState('');
@@ -8,17 +11,68 @@ const PaymentPage = (props) => {
   const [cvv, setCvv] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  const {price} = useParams();
-  const pricefix = parseInt(price, 10);
+  const [operationStatus, setOperationStatus] = useState('');
+    const navigate = useNavigate();
+  const location = useLocation();
+  const { entry_date, exit_date, price, dwelling } = location.state;
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (cardNumber && expiryDate && cvv && phoneNumber) {
       setOpenSnackbar(true);
+      console.log('data', cardNumber, expiryDate, cvv, phoneNumber, dwelling, entry_date, exit_date);
+      try {
+        const tokenResponse = await axios.post(
+          `${API_URL}/api/auth/jwt/refresh/`,
+          { refresh: localStorage.getItem('refresh_token') },
+        );
+      
+        if (tokenResponse.status === 200 && tokenResponse.data && tokenResponse.data.access) {
+          localStorage.setItem('access_token', tokenResponse.data.access);
+          const axiosConfig = {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+          };
+      
+          try {
+            const dwellingsResponse = await axios.post(
+              `${API_URL}/api/payment/`,
+              {
+                'card_number': cardNumber,
+                'expiration_date': expiryDate,
+                'cvv': cvv,
+                'dwelling': dwelling,
+                'check_in': entry_date,
+                'check_out': exit_date,
+              },
+              axiosConfig
+            );
+            console.log('dwellingsResponse', dwellingsResponse);
+
+            if (dwellingsResponse.status === 200) {
+                navigate(`/dwelling/${dwelling}`);
+            } else {
+                console.error('Payment failed:', dwellingsResponse.data);
+                setOperationStatus(false);
+            }
+      
+          } catch (dwellingsError) {
+            console.error('Error in dwellings request:', dwellingsError);
+            setOperationStatus(false);
+
+          }
+        } else {
+          console.error('Failed to get access token:', tokenResponse.data);
+            setOperationStatus(false);
+        }
+      } catch (refreshError) {
+        console.error('Error refreshing token:', refreshError);
+        setOperationStatus(false);
+      };
     } else {
       alert('Будь ласка, заповніть всі поля коректно');
     }
@@ -27,8 +81,13 @@ const PaymentPage = (props) => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Оплата за бронювання: {pricefix} грн
+        Оплата за бронювання: {price} грн
       </Typography>
+      {operationStatus === false && (
+        <Typography variant="h6" gutterBottom>
+          Оплата не вдалась
+        </Typography>
+      )}
       <form>
         <TextField
           label="Card Number"

@@ -10,6 +10,11 @@
     z-index: 100;
     display: block;
   }
+  .centered-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
   /* Content */
   .Content {
@@ -235,3 +240,27 @@
   }
   
   
+  @media only screen and (min-width: 768px) {
+    .BurgerButton {
+      display: none !important;
+    }
+    .BurgerMenu {
+      display: none !important;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .NavListWrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .BurgerButton {
+      display: block;
+    }
+    .BurgerMenu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
