@@ -83,34 +83,39 @@ const Dwelling = () => {
 
   const handleSaveReview = async (reviewData) => {
     const comment = reviewData.comment;
-    const postdata = {
-        rating: 5,
-        comment: comment,
-        dwelling: dwellingIDNumber,
+    try {
+        const token = await axios.post(
+            `${API_URL}/api/auth/jwt/refresh/`,
+            { refresh: localStorage.getItem('refresh_token') },
+            );
+        if (token.status === 200){
+            localStorage.setItem('access_token', token.data.access);
+        }
+    }
+    catch (error) {
+        console.error('Error refreshing token:', error);
     }
     const axiosConfig = {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
       };
-    try {
-    
-      if (!dwelling.reviews) {
-        dwelling.reviews = [];
-      }
-    
-      dwelling.reviews.push({ comment })
-      //eslint-disable-next-line
-      const response = await axios.post(
+    try{
+        //eslint-disable-next-line
+        const response = await axios.post(
         `${API_URL}/api/reviews/`,
-        axiosConfig,
-        postdata,
-      );
-    
-    } catch (error) {
-      console.error('Error updating dwelling:', error);
+        {
+            'rating': 5,
+            'comment': comment,
+            'dwelling': dwelling.id
+        },
+        axiosConfig
+        );
     }
+    catch (error) {
+        console.error('Error refreshing token:', error);
+    }
+
   };
 
   const navigate = useNavigate();
@@ -144,13 +149,11 @@ const Dwelling = () => {
       return;
     }
   
-    const term = dates.exitDate - dates.entryDate;
-    const term1 = Math.floor(term / (1000 * 60 * 60 * 24));
     const params = {
       entry_date: dates.entryDate,
       exit_date: dates.exitDate,
       dwelling: dwellingIDNumber,
-      price: dwelling.price * term1,
+      price: dwelling.price,
     };
     navigate('/payment', { state: params });
   };
@@ -179,7 +182,7 @@ const Dwelling = () => {
             </Button>
         </Box>
 
-<Comments id={dwellingIDNumber} />
+        <Comments id={dwellingIDNumber} />
 
     {showReviewForm && <ReviewForm onSaveReview={handleSaveReview} />}
       {!isAuthenticated && (
