@@ -5,6 +5,8 @@ import './style.css'
 
 
 const Home = () => {
+        const destinationLink = localStorage.getItem('access_token') ? '/dwelling' : '/registry';
+
     return ( 
     <>
     <Container>
@@ -19,7 +21,7 @@ const Home = () => {
           Discover a world of seamless bookings and unbeatable deals. Book with confidence, travel with ease – only at Booking-copy.com.
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <Link component={RouterLink} to="/registry" underline="none">
+        <Link component={RouterLink} to={destinationLink} underline="none">
           <Button variant="contained" color="primary">
             Start Your Journey
           </Button>
