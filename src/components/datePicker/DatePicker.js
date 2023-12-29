@@ -23,7 +23,6 @@ const DatePicker = ({ onChange }) => {
       value={entryDate}
       onChange={handleDateChange('entry')}
     />
-    —
     <TextField
       type="date"
       label=""

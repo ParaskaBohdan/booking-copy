@@ -1,5 +1,5 @@
 import React from 'react';
-// import ModalDwelling from '../modalDwelling/ModalDwelling';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import { NavLink } from "react-router-dom";
 import './style.css';
 
@@ -32,51 +32,46 @@ const ListDwellings = (props) => {
 
 
   return (
-    <div className="table-container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>City</th>
-            <th>Area</th>
-            <th>Guests</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
+    <TableContainer component={Paper} className="table-container">
+      <Table className="table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell>City</TableCell>
+            <TableCell>Area</TableCell>
+            <TableCell>Guests</TableCell>
+            <TableCell>Link</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {!filteredDwellings || filteredDwellings.length <= 0 ? (
-            <tr>
-              <td colSpan="5" align="center">
-                <b>No results found</b>
-              </td>
-            </tr>
+            <TableRow>
+              <TableCell colSpan={5} align="center">
+                <Typography variant="subtitle1">
+                  <b>No results found</b>
+                </Typography>
+              </TableCell>
+            </TableRow>
           ) : (
             filteredDwellings.map((dwelling) => (
-              <tr key={dwelling.id}>
-                <td>{dwelling.title}</td>
-                <td>{dwelling.city.name}</td>
-                <td>{dwelling.area} m²</td>
-                <td>{dwelling.guests} guests</td>
-                {/* <td>
-                  <ModalDwelling
-                    create={false}
-                    dwelling={dwelling}
-                    resetState={props.resetState}
-                    newDwelling={props.newDwelling}
-                    onClose={() => {}}
-                  />
-                </td> */}
-                <td>
-                <NavLink to={'/dwelling/'+dwelling.id}>
-                    <span>{dwelling.title}</span>
+              <TableRow key={dwelling.id}>
+                <TableCell>{dwelling.title}</TableCell>
+                <TableCell>{dwelling.city.name}</TableCell>
+                <TableCell>{dwelling.area} m²</TableCell>
+                <TableCell>{dwelling.guests} guests</TableCell>
+                <TableCell>
+                  <NavLink to={`/dwelling/${dwelling.id}`}>
+                    <Typography variant="body2">
+                      {dwelling.title}
+                    </Typography>
                   </NavLink>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))
           )}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 
