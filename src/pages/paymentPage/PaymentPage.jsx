@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_URL } from '../../index';
 import { useNavigate } from 'react-router-dom';
 
-const PaymentPage = (props) => {
+const PaymentPage = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
@@ -74,18 +74,18 @@ const PaymentPage = (props) => {
         setOperationStatus(false);
       };
     } else {
-      alert('Будь ласка, заповніть всі поля коректно');
+      alert('Please fill in all fields correctly');
     }
   };
 
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Оплата за бронювання: {price} грн
+      Payment for the reservation: {price} $
       </Typography>
       {operationStatus === false && (
         <Typography variant="h6" gutterBottom>
-          Оплата не вдалась
+          Payment failed
         </Typography>
       )}
       <form>
@@ -137,14 +137,14 @@ const PaymentPage = (props) => {
           inputProps={{ maxLength: 15 }}
         />
         <Button variant="contained" color="primary" onClick={handlePayment}>
-          Оплатити
+            Pay
         </Button>
       </form>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
-        message="Оплата успішна"
+        message="Payment successful"
       />
     </div>
   );
