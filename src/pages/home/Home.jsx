@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Container, Button, Box } from '@mui/material';
+import { Typography, Container, Button, Box, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import './style.css'
 
 
@@ -18,9 +19,11 @@ const Home = () => {
           Discover a world of seamless bookings and unbeatable deals. Book with confidence, travel with ease – only at Booking-copy.com.
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <Button variant="contained" color="primary" mt={4}>
-          Start Your Journey
-        </Button>
+        <Link component={RouterLink} to="/registry" underline="none">
+          <Button variant="contained" color="primary">
+            Start Your Journey
+          </Button>
+        </Link>
       </Box>
     </Container>
     </> );
